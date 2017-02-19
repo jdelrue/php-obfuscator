@@ -1,5 +1,5 @@
 {
-    "name":               "naneau/php-obfuscator",
+    "name":               "jdelrue/php-obfuscator",
     "description":        "A basic but functional PHP obfuscator for object oriented PHP",
     "license":            "MIT",
     "minimum-stability":  "dev",
