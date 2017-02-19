@@ -34,6 +34,7 @@ use \InvalidArgumentException;
  */
 class ScrambleVariable extends ScramblerVisitor
 {
+    private $ignore = Array();
     /**
      * Constructor
      *
@@ -58,6 +59,13 @@ class ScrambleVariable extends ScramblerVisitor
      **/
     public function enterNode(Node $node)
     {
+        if(isset($node->name) && $node->name == "__construct"){
+                foreach($node->params as $param){
+                    array_push($this->ignore, $param->name);
+                }
+        }else if(isset($node->name) &&  in_array($node->name, $this->ignore)){ //dont do constructor vars
+            return;
+        }
         // Function param or variable use
         if ($node instanceof Param || $node instanceof StaticVar || $node instanceof Variable) {
             return $this->scramble($node);
