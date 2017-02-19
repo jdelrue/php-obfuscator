@@ -60,9 +60,11 @@ class ScrambleVariable extends ScramblerVisitor
     public function enterNode(Node $node)
     {
         if(isset($node->name) && $node->name == "__construct"){
+            if(isset($node->params)){
                 foreach($node->params as $param){
                     array_push($this->ignore, $param->name);
                 }
+            }
         }else if(isset($node->name) &&  in_array($node->name, $this->ignore)){ //dont do constructor vars
             return;
         }
